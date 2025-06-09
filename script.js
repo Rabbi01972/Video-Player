@@ -1,4 +1,3 @@
-
 function getparam(a,e){return e||(e=window.location.href),new URL(e).searchParams.get(a)}
 let s=a=>document.getElementById(a);
 
@@ -38,12 +37,12 @@ let getbase=()=>{
 
 
 //Player Openers (diff. func. coding intentionally)
-let opensp=()=> { window.open('https://rabbi0197273.github.io/Rabbi123/sopplayer.html?id='+base)}
-let openplyr=()=> { window.open('https://rabbi0197273.github.io/Rabbi123/plyr.html?id='+base)}
-let openfluid=()=> { window.open('https://rabbi0197273.github.io/Rabbi123/fluid.html?id='+base)}
-let openafterglow=()=> { window.open('https://rabbi0197273.github.io/Rabbi123/afterglow.html?id='+base)}
-let openmediaelements=()=> { window.open('https://rabbi0197273.github.io/Rabbi123/mediaelements.html?id='+base)}
-let openvlitejs=()=> { window.open('https://rabbi0197273.github.io/Rabbi123/vlitejs.html?id='+base)}
+let opensp=()=> { window.open('https://rabbi01972.github.io/Video-Player/sopplayer.html?id='+base)}
+let openplyr=()=> { window.open('https://rabbi01972.github.io/Video-Player/plyr.html?id='+base)}
+let openfluid=()=> { window.open('https://rabbi01972.github.io/Video-Player/fluid.html?id='+base)}
+let openafterglow=()=> { window.open('https://rabbi01972.github.io/Video-Player/afterglow.html?id='+base)}
+let openmediaelements=()=> { window.open('https://rabbi01972.github.io/Video-Player/mediaelements.html?id='+base)}
+let openvlitejs=()=> { window.open('https://rabbi01972.github.io/Video-Player/vlitejs.html?id='+base)}
 
 
 let pmsg = 'Copy Embed Code' ;
@@ -51,7 +50,7 @@ let pmsg = 'Copy Embed Code' ;
 let embedsp=()=> {
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi0197273.github.io/Rabbi123/sopplayer.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/sopplayer.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
@@ -59,7 +58,7 @@ gyroscope; picture-in-picture" allowfullscreen>
 let embedplyr=()=> {
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi0197273.github.io/Rabbi123/plyr.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/plyr.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
@@ -67,7 +66,7 @@ gyroscope; picture-in-picture" allowfullscreen>
 let embedfluid=()=> {
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi0197273.github.io/Rabbi123/fluid.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/fluid.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
@@ -75,7 +74,7 @@ gyroscope; picture-in-picture" allowfullscreen>
 let embedafterglow=()=> {
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi0197273.github.io/Rabbi123/afterglow.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/afterglow.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
@@ -83,7 +82,7 @@ gyroscope; picture-in-picture" allowfullscreen>
 let embedmediaelements=()=> {
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi0197273.github.io/Rabbi123/mediaelements.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/mediaelements.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
@@ -91,7 +90,7 @@ gyroscope; picture-in-picture" allowfullscreen>
 let embedvlitejs=()=> {
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi0197273.github.io/Rabbi123/vlitejs.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/vlitejs.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`);
@@ -100,14 +99,13 @@ gyroscope; picture-in-picture" allowfullscreen>
 
 
 let iframe=()=> {
-  s('afterglow').src= 'https://rabbi0197273.github.io/Rabbi123/afterglow.html?id='+base;
-  s('fluid').src='https://rabbi0197273.github.io/Rabbi123/fluid.html?id='+base;
-  s('plyr').src='https://rabbi0197273.github.io/Rabbi123/plyr.html?id='+base;
+  s('afterglow').src= 'https://rabbi01972.github.io/Video-Player/afterglow.html?id='+base;
+  s('fluid').src='https://rabbi01972.github.io/Video-Player/fluid.html?id='+base;
+  s('plyr').src='https://rabbi01972.github.io/Video-Player/plyr.html?id='+base;
 
-  s('vlitejs').src='https://rabbi0197273.github.io/Rabbi123/vlitejs.html?id='+base;
-  s('mediaelements').src='https://rabbi0197273.github.io/Rabbi123/mediaelements.html?id='+base;
+  s('vlitejs').src='https://rabbi01972.github.io/Video-Player/vlitejs.html?id='+base;
+  s('mediaelements').src='https://rabbi01972.github.io/Video-Player/mediaelements.html?id='+base;
   
-    s('sopplayer').src='https://rabbi0197273.github.io/Rabbi123/sopplayer.html?id='+base;
+    s('sopplayer').src='https://rabbi01972.github.io/Video-Player/sopplayer.html?id='+base;
   
 }
-
