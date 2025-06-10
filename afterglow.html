@@ -10,7 +10,7 @@
         <source type="video/mp4" src="https://bit.ly/bbsamplevideo" />
     </video>
 
-<script type="text/javascript" src="./assets/afterglow.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/moay/afterglow@1.1.0/dist/afterglow.min.js"></script>
 <script>
   var apikey = ['AIzaSyCt3DULzE2trDJhfFUosWZT-3GEObbMqVU', 'AIzaSyCsbx8BSyLwkw6XX6Lg5OF1U0HNtI9VmCY', 'AIzaSyBLMJAT6oqTZxAMsCsMjXzoo4lkJL4MmfM', 'AIzaSyCIY6fomcJxOt0XQ_naa1rzfd5wlOMGKDY'][Math.floor(Math.random() * 4)];
  console.log(apikey);
@@ -23,16 +23,11 @@
     json = JSON.parse(atob(getparam('id'))) ;
     let driveid = json.id;
     videolink = `https://www.googleapis.com/drive/v3/files/${driveid }?alt=media&key=${apikey}`;
-    //video.src(videolink);
-    document.getElementById('my-video').src([
-			{type: "video/mp4", src: videolink},
-			{type: "rtmp/mp4", src: videolink}
-		]);
-    document.getElementById('my-video').poster_ = 'https://lh3.googleusercontent.com/d/'+driveid ;
+    video.src = videolink;
+    video.poster = 'https://lh3.googleusercontent.com/d/'+driveid ;
   }
 </script>
 
-</script>
 <style>
 html, body {
   height: 100vh !important;
@@ -69,8 +64,6 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  /*object-fit: cover;
-  z-index: -1;*/
 }
 </style>
 <script>
