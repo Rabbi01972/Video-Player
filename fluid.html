@@ -25,11 +25,17 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow">
 
-
 <style>
   body {
     margin : 0;
     padding: 0;
+  }
+  /* PIP বাটন লুকানোর জন্য */
+  .fluid_controls_pip {
+    display: none !important;
+  }
+  .fluid_button_pip {
+    display: none !important;
   }
 </style>
 <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
@@ -56,7 +62,8 @@
 		"allowDownload": false,
 		"playButtonShowing": true,
 		"fillToContainer": false,
-		"posterImage": ""
+		"posterImage": "",
+		"pictureInPicture": false
 	},
 	"vastOptions": {
 		"adList": [],
@@ -116,7 +123,6 @@
 <script>
   var apikey = ['AIzaSyCt3DULzE2trDJhfFUosWZT-3GEObbMqVU', 'AIzaSyCsbx8BSyLwkw6XX6Lg5OF1U0HNtI9VmCY', 'AIzaSyBLMJAT6oqTZxAMsCsMjXzoo4lkJL4MmfM', 'AIzaSyCIY6fomcJxOt0XQ_naa1rzfd5wlOMGKDY'][Math.floor(Math.random() * 4)];
  console.log(apikey);
-   //apikey = 'AIzaSyD739-eb6NzS_KbVJq1K8ZAxnrMfkIqPyw';
   function getparam(a,e){return e||(e=window.location.href),new URL(e).searchParams.get(a)}
 
   let video = document.getElementById('video-id');
