@@ -10,22 +10,9 @@ let get=()=>{
 }
 let getbase=()=>{
     let ply = [];
-  /*
-    ply.videourl = `https://www.googleapis.com/drive/v3/files/${getIdFromUrl(s('videourl').value) }?alt=media&key=${apikey}`;
-
-  
-  
-  let poster = "";
-      if(s('posterurl').value){
-       poster = s('posterurl').value ;}
-  else {
-    poster = 'https://lh3.googleusercontent.com/d/'+getIdFromUrl(s('videourl').value);
-  }
-    ply.posterurl = poster ; */
   
     ply.id =  getIdFromUrl(s('videourl').value);
       
-   // ply.videotitle = s('videotitle').value;
     console.log(ply);
   
     var arr = JSON.stringify(Object.assign({}, ply))
@@ -37,75 +24,80 @@ let getbase=()=>{
 
 
 //Player Openers (diff. func. coding intentionally)
-let opensp=()=> { window.open('https://rabbi01972.github.io/Video-Player/sopplayer.html?id='+base)}
-let openplyr=()=> { window.open('https://rabbi01972.github.io/Video-Player/plyr.html?id='+base)}
-let openfluid=()=> { window.open('https://rabbi01972.github.io/Video-Player/fluid.html?id='+base)}
-let openafterglow=()=> { window.open('https://rabbi01972.github.io/Video-Player/afterglow.html?id='+base)}
-let openmediaelements=()=> { window.open('https://rabbi01972.github.io/Video-Player/mediaelements.html?id='+base)}
-let openvlitejs=()=> { window.open('https://rabbi01972.github.io/Video-Player/vlitejs.html?id='+base)}
+let opensp=()=> { window.open('./sopplayer.html?id='+base)}
+let openplyr=()=> { window.open('./plyr.html?id='+base)}
+let openfluid=()=> { window.open('./fluid.html?id='+base)}
+let openafterglow=()=> { window.open('./afterglow.html?id='+base)}
+let openmediaelements=()=> { window.open('./mediaelements.html?id='+base)}
+let openvlitejs=()=> { window.open('./vlitejs.html?id='+base)}
 
 
 let pmsg = 'Copy Embed Code' ;
 //Player Embedders
 let embedsp=()=> {
+  const currentDomain = window.location.origin + window.location.pathname.replace('/index.html', '').replace('/', '');
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi01972.github.io/Video-Player/sopplayer.html?id=${base}" 
+src="${currentDomain}/sopplayer.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
 }
 let embedplyr=()=> {
+  const currentDomain = window.location.origin + window.location.pathname.replace('/index.html', '').replace('/', '');
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi01972.github.io/Video-Player/plyr.html?id=${base}" 
+src="${currentDomain}/plyr.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
 }
 let embedfluid=()=> {
+  const currentDomain = window.location.origin + window.location.pathname.replace('/index.html', '').replace('/', '');
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi01972.github.io/Video-Player/fluid.html?id=${base}" 
+src="${currentDomain}/fluid.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
 }
 let embedafterglow=()=> {
+  const currentDomain = window.location.origin + window.location.pathname.replace('/index.html', '').replace('/', '');
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi01972.github.io/Video-Player/afterglow.html?id=${base}" 
+src="${currentDomain}/afterglow.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
 }
 let embedmediaelements=()=> {
+  const currentDomain = window.location.origin + window.location.pathname.replace('/index.html', '').replace('/', '');
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi01972.github.io/Video-Player/mediaelements.html?id=${base}" 
+src="${currentDomain}/mediaelements.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
 </iframe>`)
 }
 let embedvlitejs=()=> {
+  const currentDomain = window.location.origin + window.location.pathname.replace('/index.html', '').replace('/', '');
   prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="https://rabbi01972.github.io/Video-Player/vlitejs.html?id=${base}" 
+src="${currentDomain}/vlitejs.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-gyroscope; picture-in-picture" allowfullscreen>
-</iframe>`);
+gyroscope; picture-in-picture" allowfullscreen>`);
 }
 
 
 
 let iframe=()=> {
-  s('afterglow').src= 'https://rabbi01972.github.io/Video-Player/afterglow.html?id='+base;
-  s('fluid').src='https://rabbi01972.github.io/Video-Player/fluid.html?id='+base;
-  s('plyr').src='https://rabbi01972.github.io/Video-Player/plyr.html?id='+base;
+  s('afterglow').src= './afterglow.html?id='+base;
+  s('fluid').src='./fluid.html?id='+base;
+  s('plyr').src='./plyr.html?id='+base;
 
-  s('vlitejs').src='https://rabbi01972.github.io/Video-Player/vlitejs.html?id='+base;
-  s('mediaelements').src='https://rabbi01972.github.io/Video-Player/mediaelements.html?id='+base;
+  s('vlitejs').src='./vlitejs.html?id='+base;
+  s('mediaelements').src='./mediaelements.html?id='+base;
   
-    s('sopplayer').src='https://rabbi01972.github.io/Video-Player/sopplayer.html?id='+base;
+    s('sopplayer').src='./sopplayer.html?id='+base;
   
 }
