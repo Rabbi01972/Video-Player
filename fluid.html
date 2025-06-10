@@ -27,17 +27,29 @@
 
 <style>
   body {
-    margin : 0;
+    margin: 0;
     padding: 0;
   }
-  /* PIP বাটন লুকানোর জন্য */
-  .fluid_controls_pip {
+  
+  /* PIP বাটন লুকানোর জন্য আরও শক্তিশালী CSS */
+  .fluid_control_pictureInPicture,
+  .fluid_controls_pip,
+  .fluid_button_pip,
+  div[data-fluid-control="pictureInPicture"],
+  .fluid_controls_container div[data-title="PIP"],
+  .fluid_control.fluid_control_pictureInPicture,
+  button[aria-label="Picture in Picture"],
+  [data-fluid-control="pictureInPicture"] {
     display: none !important;
-  }
-  .fluid_button_pip {
-    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    pointer-events: none !important;
   }
 </style>
+
 <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 <video poster="https://bit.ly/bbsampleposter" height="100%" width="100%" id="video-id"><source src="https://bit.ly/bbsamplevideo" type="video/mp4" />
 <script>
@@ -63,7 +75,8 @@
 		"playButtonShowing": true,
 		"fillToContainer": false,
 		"posterImage": "",
-		"pictureInPicture": false
+		"pictureInPicture": false,
+		"primaryColor": false
 	},
 	"vastOptions": {
 		"adList": [],
@@ -119,6 +132,21 @@
     document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
     document.addEventListener('mozfullscreenchange', handleFullscreenChange);
     document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+    
+    // JavaScript দিয়ে PIP বাটন সরানো
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            // সব সম্ভাব্য PIP বাটন খুঁজে বের করে সরানো
+            var pipButtons = document.querySelectorAll('.fluid_control_pictureInPicture, .fluid_controls_pip, .fluid_button_pip, [data-fluid-control="pictureInPicture"]');
+            pipButtons.forEach(function(button) {
+                if(button) {
+                    button.style.display = 'none';
+                    button.style.visibility = 'hidden';
+                    button.remove();
+                }
+            });
+        }, 1000);
+    });
 </script>
 <script>
   var apikey = ['AIzaSyCt3DULzE2trDJhfFUosWZT-3GEObbMqVU', 'AIzaSyCsbx8BSyLwkw6XX6Lg5OF1U0HNtI9VmCY', 'AIzaSyBLMJAT6oqTZxAMsCsMjXzoo4lkJL4MmfM', 'AIzaSyCIY6fomcJxOt0XQ_naa1rzfd5wlOMGKDY'][Math.floor(Math.random() * 4)];
