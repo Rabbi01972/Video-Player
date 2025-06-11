@@ -1,130 +1,111 @@
-function getparam(a, e) {
-  return e || (e = window.location.href), new URL(e).searchParams.get(a)
-}
-const s = (a) => document.getElementById(a)
+function getparam(a,e){return e||(e=window.location.href),new URL(e).searchParams.get(a)}
+let s=a=>document.getElementById(a);
 
-function getIdFromUrl(url) {
-  return url.match(/[-\w]{25,}/)
-}
-const apikey = [
-  "AIzaSyCt3DULzE2trDJhfFUosWZT-3GEObbMqVU",
-  "AIzaSyCsbx8BSyLwkw6XX6Lg5OF1U0HNtI9VmCY",
-  "AIzaSyBLMJAT6oqTZxAMsCsMjXzoo4lkJL4MmfM",
-  "AIzaSyCIY6fomcJxOt0XQ_naa1rzfd5wlOMGKDY",
-][Math.floor(Math.random() * 4)]
 
-const get = () => {
-  getbase()
-}
+function getIdFromUrl(url) { return url.match(/[-\w]{25,}/); }
+let apikey = 'AIzaSyD739-eb6NzS_KbVJq1K8ZAxnrMfkIqPyw';
 
-const getbase = () => {
-  const ply = []
-  ply.id = getIdFromUrl(s("videourl").value)
-  console.log(ply)
+let get=()=>{
+  getbase();
+}
+let getbase=()=>{
+    let ply = [];
+  /*
+    ply.videourl = `https://www.googleapis.com/drive/v3/files/${getIdFromUrl(s('videourl').value) }?alt=media&key=${apikey}`;
 
-  var arr = JSON.stringify(Object.assign({}, ply))
-  console.log(btoa(arr))
-  window.base = btoa(arr)
-  iframe()
-  return btoa(arr)
-}
-
-let base
-//Player Openers
-const openjw = () => {
-  window.open("jwplayer.html?id=" + base)
-}
-const openplyr = () => {
-  window.open("plyr.html?id=" + base)
-}
-const openfluid = () => {
-  window.open("fluid.html?id=" + base)
-}
-const openafterglow = () => {
-  window.open("afterglow.html?id=" + base)
-}
-const openmediaelements = () => {
-  window.open("mediaelements.html?id=" + base)
-}
-const openvlitejs = () => {
-  window.open("vlitejs.html?id=" + base)
+  
+  
+  let poster = "";
+      if(s('posterurl').value){
+       poster = s('posterurl').value ;}
+  else {
+    poster = 'https://lh3.googleusercontent.com/d/'+getIdFromUrl(s('videourl').value);
+  }
+    ply.posterurl = poster ; */
+  
+    ply.id =  getIdFromUrl(s('videourl').value);
+      
+   // ply.videotitle = s('videotitle').value;
+    console.log(ply);
+  
+    var arr = JSON.stringify(Object.assign({}, ply))
+    console.log(btoa(arr));
+    window.base =btoa(arr);
+    iframe();
+    return btoa(arr);
 }
 
-const pmsg = "Copy Embed Code"
+
+//Player Openers (diff. func. coding intentionally)
+let opensp=()=> { window.open('https://rabbi01972.github.io/Video-Player/sopplayer.html?id='+base)}
+let openplyr=()=> { window.open('https://rabbi01972.github.io/Video-Player/plyr.html?id='+base)}
+let openfluid=()=> { window.open('https://rabbi01972.github.io/Video-Player/fluid.html?id='+base)}
+let openafterglow=()=> { window.open('https://rabbi01972.github.io/Video-Player/afterglow.html?id='+base)}
+let openmediaelements=()=> { window.open('https://rabbi01972.github.io/Video-Player/mediaelements.html?id='+base)}
+let openvlitejs=()=> { window.open('https://rabbi01972.github.io/Video-Player/vlitejs.html?id='+base)}
+
+
+let pmsg = 'Copy Embed Code' ;
 //Player Embedders
-const embedjw = () => {
-  prompt(
-    pmsg,
-    `<iframe width="560" height="315" 
+let embedsp=()=> {
+  prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="jwplayer.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/sopplayer.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
-</iframe>`,
-  )
+</iframe>`)
 }
-const embedplyr = () => {
-  prompt(
-    pmsg,
-    `<iframe width="560" height="315" 
+let embedplyr=()=> {
+  prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="plyr.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/plyr.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
-</iframe>`,
-  )
+</iframe>`)
 }
-const embedfluid = () => {
-  prompt(
-    pmsg,
-    `<iframe width="560" height="315" 
+let embedfluid=()=> {
+  prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="fluid.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/fluid.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
-</iframe>`,
-  )
+</iframe>`)
 }
-const embedafterglow = () => {
-  prompt(
-    pmsg,
-    `<iframe width="560" height="315" 
+let embedafterglow=()=> {
+  prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="afterglow.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/afterglow.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
-</iframe>`,
-  )
+</iframe>`)
 }
-const embedmediaelements = () => {
-  prompt(
-    pmsg,
-    `<iframe width="560" height="315" 
+let embedmediaelements=()=> {
+  prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="mediaelements.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/mediaelements.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
-</iframe>`,
-  )
+</iframe>`)
 }
-const embedvlitejs = () => {
-  prompt(
-    pmsg,
-    `<iframe width="560" height="315" 
+let embedvlitejs=()=> {
+  prompt(pmsg,`<iframe width="560" height="315" 
 scrolling="no"
-src="vlitejs.html?id=${base}" 
+src="https://rabbi01972.github.io/Video-Player/vlitejs.html?id=${base}" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
 gyroscope; picture-in-picture" allowfullscreen>
-</iframe>`,
-  )
+</iframe>`);
 }
 
-// Update the iframe function
-const iframe = () => {
-  s("jwplayer").src = "jwplayer.html?id=" + base
-  s("afterglow").src = "afterglow.html?id=" + base
-  s("fluid").src = "fluid.html?id=" + base
-  s("plyr").src = "plyr.html?id=" + base
-  s("vlitejs").src = "vlitejs.html?id=" + base
-  s("mediaelements").src = "mediaelements.html?id=" + base
+
+
+let iframe=()=> {
+  s('afterglow').src= 'https://rabbi01972.github.io/Video-Player/afterglow.html?id='+base;
+  s('fluid').src='https://rabbi01972.github.io/Video-Player/fluid.html?id='+base;
+  s('plyr').src='https://rabbi01972.github.io/Video-Player/plyr.html?id='+base;
+
+  s('vlitejs').src='https://rabbi01972.github.io/Video-Player/vlitejs.html?id='+base;
+  s('mediaelements').src='https://rabbi01972.github.io/Video-Player/mediaelements.html?id='+base;
+  
+    s('sopplayer').src='https://rabbi01972.github.io/Video-Player/sopplayer.html?id='+base;
+  
 }
