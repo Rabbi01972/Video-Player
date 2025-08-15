@@ -4,37 +4,129 @@
 <!-- Meta Tags for SEO -->
 <meta name="description" content="DrivePlyr is a Google Drive Proxy Video Player with Many Powerful HTML5 Players, Hidden ID, and Many Features. Play your videos from Google Drive with ease.">
 <meta name="keywords" content="DrivePlyr, Google Drive, Proxy, Video Player, HTML5 Player, Hidden ID, Features">
-<meta name="author" content="SH20RAJ">
+<meta name="author" content="RTube">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://rabbi01972.github.io/Video-Player/">
+<meta property="og:url" content="https://rabbi9827.github.io/video-player/">
 <meta property="og:title" content="DrivePlyr - Google Drive Proxy Video Player with Many Powerful HTML5 Players">
 <meta property="og:description" content="DrivePlyr is a Google Drive Proxy Video Player with Many Powerful HTML5 Players, Hidden ID, and Many Features. Play your videos from Google Drive with ease.">
-<meta property="og:image" content="https://rabbi01972.github.io/Video-Player/drive-logo.png">
+<meta property="og:image" content="https://sh20raj.github.io/DrivePlyr/drive-logo.png">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://rabbi01972.github.io/Video-Player/">
+<meta property="twitter:url" content="https://rabbi9827.github.io/video-player/">
 <meta property="twitter:title" content="DrivePlyr - Google Drive Proxy Video Player with Many Powerful HTML5 Players">
 <meta property="twitter:description" content="DrivePlyr is a Google Drive Proxy Video Player with Many Powerful HTML5 Players, Hidden ID, and Many Features. Play your videos from Google Drive with ease.">
-<meta property="twitter:image" content="https://rabbi01972.github.io/Video-Player/drive-logo.png">
+<meta property="twitter:image" content="https://sh20raj.github.io/DrivePlyr/drive-logo.png">
 
 <!-- Other Meta Tags -->
 <link rel="icon" href="https://raw.githubusercontent.com/SH20RAJ/DrivePlyr/main/drive-logo.png">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="index, follow">
 
+
 <style>
   body {
-    margin: 0;
+    margin : 0;
     padding: 0;
   }
-  
-  /* PIP বাটন লুকানোর জন্য আরও শক্তিশালী CSS */
-  .fluid_control_pictureInPicture,
-  .fluid_controls_pip,
-  .fluid_button_pip,
+</style>
+<script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+<video poster="https://bit.ly/bbsampleposter" height="100%" width="100%" id="video-id"><source src="https://bit.ly/bbsamplevideo" type="video/mp4" />
+<script>
+    var myFP = fluidPlayer(
+        'video-id',	{
+	"layoutControls": {
+		"controlBar": {
+			"autoHideTimeout": 3,
+			"animated": true,
+			"autoHide": true
+		},
+		"htmlOnPauseBlock": {
+			"html": null,
+			"height": null,
+			"width": null
+		},
+		"autoPlay": false,
+		"mute": false,
+		"allowTheatre": true,
+		"playPauseAnimation": true,
+		"playbackRateEnabled": true,
+		"allowDownload": false,
+		"playButtonShowing": true,
+		"fillToContainer": false,
+		"posterImage": ""
+	},
+	"vastOptions": {
+		"adList": [],
+		"adCTAText": false,
+		"adCTATextPosition": ""
+	}
+}
+    );
+
+    // Auto-rotate screen functionality for fullscreen
+    function rotateToLandscape() {
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock('landscape-primary').catch(err => {
+                console.log('Screen orientation lock failed:', err);
+            });
+        } else if (screen.lockOrientation) {
+            screen.lockOrientation('landscape-primary');
+        } else if (screen.webkitLockOrientation) {
+            screen.webkitLockOrientation('landscape-primary');
+        } else if (screen.mozLockOrientation) {
+            screen.mozLockOrientation('landscape-primary');
+        }
+    }
+
+    function unlockOrientation() {
+        if (screen.orientation && screen.orientation.unlock) {
+            screen.orientation.unlock();
+        } else if (screen.unlockOrientation) {
+            screen.unlockOrientation();
+        } else if (screen.webkitUnlockOrientation) {
+            screen.webkitUnlockOrientation();
+        } else if (screen.mozUnlockOrientation) {
+            screen.mozUnlockOrientation();
+        }
+    }
+
+    // Handle fullscreen changes
+    function handleFullscreenChange() {
+        const isFullscreen = document.fullscreenElement || 
+                            document.webkitFullscreenElement || 
+                            document.mozFullScreenElement || 
+                            document.msFullscreenElement;
+        
+        if (isFullscreen) {
+            setTimeout(rotateToLandscape, 100);
+        } else {
+            setTimeout(unlockOrientation, 100);
+        }
+    }
+
+    // Add event listeners
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+</script>
+<script>
+  var apikey = ['AIzaSyCt3DULzE2trDJhfFUosWZT-3GEObbMqVU', 'AIzaSyCsbx8BSyLwkw6XX6Lg5OF1U0HNtI9VmCY', 'AIzaSyBLMJAT6oqTZxAMsCsMjXzoo4lkJL4MmfM', 'AIzaSyCIY6fomcJxOt0XQ_naa1rzfd5wlOMGKDY'][Math.floor(Math.random() * 4)];
+ console.log(apikey);
+   //apikey = 'AIzaSyD739-eb6NzS_KbVJq1K8ZAxnrMfkIqPyw';
+  function getparam(a,e){return e||(e=window.location.href),new URL(e).searchParams.get(a)}
+
+  let video = document.getElementById('video-id');
+  if(getparam('id')){
+    let json = JSON.parse(atob(getparam('id'))) ;
+    let driveid = json.id;
+    video.src = `https://www.googleapis.com/drive/v3/files/${driveid }?alt=media&key=${apikey}`;
+    video.poster = 'https://lh3.googleusercontent.com/d/'+driveid;
+  }
+</script>  .fluid_button_pip,
   div[data-fluid-control="pictureInPicture"],
   .fluid_controls_container div[data-title="PIP"],
   .fluid_control.fluid_control_pictureInPicture,
