@@ -3,217 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrivePlyr - Google Drive Proxy Video Player with JW Player</title>
-    
-    <!-- Meta Tags for SEO -->
-    <meta name="description" content="DrivePlyr is a Google Drive Proxy Video Player with JW Player, Hidden ID, and Many Features. Play your videos from Google Drive with ease.">
-    <meta name="keywords" content="DrivePlyr, Google Drive, Proxy, Video Player, JW Player, Hidden ID, Features">
-    <meta name="author" content="SH20RAJ">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sh20raj.github.io/DrivePlyr/">
-    <meta property="og:title" content="DrivePlyr - Google Drive Proxy Video Player with JW Player">
-    <meta property="og:description" content="DrivePlyr is a Google Drive Proxy Video Player with JW Player, Hidden ID, and Many Features. Play your videos from Google Drive with ease.">
-    <meta property="og:image" content="https://sh20raj.github.io/DrivePlyr/drive-logo.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://sh20raj.github.io/DrivePlyr/">
-    <meta property="twitter:title" content="DrivePlyr - Google Drive Proxy Video Player with JW Player">
-    <meta property="twitter:description" content="DrivePlyr is a Google Drive Proxy Video Player with JW Player, Hidden ID, and Many Features. Play your videos from Google Drive with ease.">
-    <meta property="twitter:image" content="https://sh20raj.github.io/DrivePlyr/drive-logo.png">
-    
-    <!-- Other Meta Tags -->
     <link rel="icon" href="https://raw.githubusercontent.com/SH20RAJ/DrivePlyr/main/drive-logo.png">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="robots" content="index, follow">
+    <title>DrivePlyr - Simple & Clean</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <style>
-        body {
-            margin: 0;
-            padding: 0;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+        body { background-color: #000; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+
+        .video_player {
+            position: relative;
+            width: 100%;
+            height: 100vh;
             background: #000;
         }
-        
-        #drivexceed-container {
-            width: 100vw;
-            height: 100vh;
+
+        .main-video { width: 100%; height: 100%; object-fit: contain; outline: none; cursor: pointer; }
+
+        /* Progress Bar (আপনার ছবির মতো নীল রঙের) */
+        .progress-area {
             position: absolute;
-            top: 0;
-            left: 0;
+            bottom: 55px;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            z-index: 10;
         }
-        
-        .error-message {
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            margin-top: 100px;
+        .progress-bar { height: 100%; width: 0%; background: #3498db; position: relative; }
+
+        /* কন্ট্রোল বার - ব্যাকগ্রাউন্ড স্বচ্ছ এবং আইকনগুলো সাজানো */
+        .controls {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            z-index: 10;
+        }
+
+        .controls-left, .controls-right { display: flex; align-items: center; gap: 10px; }
+
+        /* আপনার দেওয়া SVG বাটন ডিজাইন - কোনো আলাদা ব্যাকগ্রাউন্ড নেই */
+        .skip-btn {
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            background: transparent; /* ব্যাকগ্রাউন্ড একদম স্বচ্ছ */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow-path {
+            fill: none;
+            stroke: #D1D1D1;
+            stroke-width: 10; 
+            stroke-linecap: square; 
+            stroke-linejoin: miter;
+        }
+        .arrow-head { fill: #D1D1D1; }
+        .number-text {
+            fill: #D1D1D1;
+            font-family: "Brush Script MT", sans-serif; 
+            font-size: 65px; 
+            font-weight: 700;
+            letter-spacing: -5px;
+        }
+
+        /* Forward Button Mirror */
+        .forward-btn svg g.arrow-group {
+            transform: scaleX(-1);
+            transform-origin: center;
+        }
+
+        .material-icons { color: #D1D1D1; cursor: pointer; font-size: 28px; }
+        .timer { color: #fff; font-size: 20px; margin-left: 5px; font-weight: 500; }
+
+        /* Central Play Icon */
+        .central-play {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px !important;
+            color: rgba(255,255,255,0.4);
+            pointer-events: none;
+            display: block;
         }
     </style>
-    
-    <!-- JW Player Patcher Script -->
-    <script src="jwpatch.min.js"></script>
-    
-    <script>
-        // API Key rotation
-        var apikey = ['AIzaSyCt3DULzE2trDJhfFUosWZT-3GEObbMqVU', 
-                      'AIzaSyCsbx8BSyLwkw6XX6Lg5OF1U0HNtI9VmCY', 
-                      'AIzaSyBLMJAT6oqTZxAMsCsMjXzoo4lkJL4MmfM', 
-                      'AIzaSyCIY6fomcJxOt0XQ_naa1rzfd5wlOMGKDY',
-                      'AIzaSyD739-eb6NzS_KbVJq1K8ZAxnrMfkIqPyw'][Math.floor(Math.random() * 5)];
-        console.log('Using API Key:', apikey);
-        
-        // Function to get URL parameters
-        function getParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-        
-        // Initialize Drivexceed function for JW Player
-        window.drivexceed = function() {
-            // Set JW Player license key
-            window.jwplayer.key = 'https://github.com/masgasatriawirawan/drivexceed/';
-            
-            let videoSrc = '';
-            let posterImage = '';
-            let videoTitle = 'DrivePlyr Video';
-            let videoDescription = 'Google Drive video player with JW Player';
-            
-            // Check if ID parameter exists
-            if(getParam('id')) {
-                try {
-                    // Decode base64 ID if needed
-                    let decodedId;
-                    try {
-                        let json = JSON.parse(atob(getParam('id')));
-                        decodedId = json.id;
-                    } catch(e) {
-                        // If not base64, use as-is
-                        decodedId = getParam('id');
-                    }
-                    
-                    // Create Google Drive video URL
-                    videoSrc = `https://www.googleapis.com/drive/v3/files/${decodedId}?alt=media&key=${apikey}`;
-                    
-                    // Create thumbnail URL
-                    posterImage = `https://drive.google.com/thumbnail?id=${decodedId}&authuser=0&sz=w640-h360-n-k-rw`;
-                    
-                    // Alternative thumbnail
-                    // posterImage = `https://lh3.googleusercontent.com/d/${decodedId}`;
-                    
-                } catch(error) {
-                    console.error('Error parsing ID:', error);
-                    document.getElementById('drivexceed-container').innerHTML = 
-                        '<div class="error-message"><h2>Invalid Video ID</h2><p>Please check the video ID and try again.</p></div>';
-                    return;
-                }
-            } else {
-                // No ID provided - show error
-                document.getElementById('drivexceed-container').innerHTML = 
-                    '<div class="error-message"><h2>No Video ID Provided</h2><p>Please provide a Google Drive file ID in the URL.</p><p>Example: ?id=YOUR_DRIVE_FILE_ID</p></div>';
-                return;
-            }
-            
-            // JW Player configuration
-            var playerConfig = {
-                "file": videoSrc,
-                "image": posterImage,
-                "title": videoTitle,
-                "description": videoDescription,
-                "mediaid": getParam('id') || 'driveplyr',
-                "type": "mp4",
-                "mute": false,
-                "autostart": false,
-                "nextupoffset": -10,
-                "repeat": false,
-                "abouttext": "DrivePlyr GitHub",
-                "aboutlink": "https://github.com/SH20RAJ/DrivePlyr",
-                "playbackRateControls": true,
-                "playbackRates": [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
-                "defaultBandwidthEstimate": false,
-                "controls": true,
-                "aspectratio": false,
-                "localization": false,
-                "height": "100%",
-                "width": "100%",
-                "displaytitle": true,
-                "displaydescription": true,
-                "stretching": "uniform",
-                "nextUpDisplay": false,
-                "qualityLabels": false,
-                "base": "https://ssl.p.jwpcdn.com/player/v/8.3.3/",
-                "preload": "metadata",
-                "flashplayer": "https://ssl.p.jwpcdn.com/player/v/8.3.3/",
-                "hlsjsdefault": true,
-                "skin": {
-                    "controlbar": {
-                        "text": "#FFFFFF",
-                        "icons": "rgba(255, 255, 255, 0.8)",
-                        "iconsActive": "#FFFFFF",
-                        "background": "rgba(0, 0, 0, 0)"
-                    },
-                    "timeslider": {
-                        "progress": "#F2F2F2",
-                        "rail": "rgba(255, 255, 255, 0.3)"
-                    },
-                    "menus": {
-                        "text": "rgba(255, 255, 255, 0.8)",
-                        "textActive": "#FFFFFF",
-                        "background": "#333333"
-                    },
-                    "tooltips": {
-                        "text": "#000000",
-                        "background": "#FFFFFF"
-                    },
-                    "url": false,
-                    "name": false
-                },
-                "renderCaptionsNatively": false,
-                "captions": {
-                    "color": "#FFFFFF",
-                    "fontSize": 15,
-                    "fontFamily": "sans",
-                    "fontOpacity": 100,
-                    "backgroundColor": "#000000",
-                    "backgroundOpacity": 75,
-                    "edgeStyle": "none",
-                    "windowColor": "#000000",
-                    "windowOpacity": 0
-                },
-                "logo": {
-                    "file": "https://raw.githubusercontent.com/SH20RAJ/DrivePlyr/main/drive-logo.png",
-                    "hide": false,
-                    "link": "https://github.com/SH20RAJ/DrivePlyr",
-                    "margin": 20,
-                    "position": "top-right"
-                },
-                "sharing": {
-                    "link": window.location.href,
-                    "heading": "Share Video",
-                    "sites": ["facebook", "twitter", "interest", "email", "tumblr", "googleplus", "reddit", "linkedin"]
-                }
-            };
-            
-            // Initialize JW Player
-            window.jwplayer('drivexceed-container').setup(playerConfig);
-        };
-        
-        // Auto-start when patcher loads
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof window.drivexceed === 'function') {
-                setTimeout(window.drivexceed, 1000);
-            }
-        });
-    </script>
 </head>
 <body>
-    <!-- JW Player Container -->
-    <div id="drivexceed-container"></div>
-    
-    <!-- Optional: Add your tracking scripts here -->
-    <!-- <script src="tracker.js"></script> -->
-    <!-- <img style="display: none;" src="https://iplogger.com/VideoPlyr"> -->
+
+    <div class="video_player">
+        <video class="main-video" id="main-video"></video>
+        
+        <i class="material-icons central-play" id="center-play">play_arrow</i>
+
+        <!-- Progress Bar -->
+        <div class="progress-area" id="progress-area">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="controls">
+            <!-- বাম দিকে: ভলিউম এবং সময় -->
+            <div class="controls-left">
+                <i class="material-icons">volume_up</i>
+                <div class="timer">
+                    <span id="current">00:00</span> / <span id="total">00:00</span>
+                </div>
+            </div>
+
+            <!-- ডান দিকে: স্কিপ বাটন, সেটিংস এবং ফুলস্ক্রিন -->
+            <div class="controls-right">
+                
+                <!-- রিউইন্ড বাটন -->
+                <div class="skip-btn" id="rewind">
+                    <svg viewBox="0 0 140 140" width="100%" height="100%">
+                        <path class="arrow-path" d="M 85 110 H 115 V 35 H 21" />
+                        <polygon class="arrow-head" points="33,17 33,53 10,35" />
+                        <text class="number-text" x="8" y="101" transform="scale(1, 1.15)">10</text>
+                    </svg>
+                </div>
+
+                <!-- ফরওয়ার্ড বাটন -->
+                <div class="skip-btn forward-btn" id="forward">
+                    <svg viewBox="0 0 140 140" width="100%" height="100%">
+                        <g class="arrow-group">
+                            <path class="arrow-path" d="M 85 110 H 115 V 35 H 21" />
+                            <polygon class="arrow-head" points="33,17 33,53 10,35" />
+                        </g>
+                        <text class="number-text" x="52" y="101" transform="scale(1, 1.15)">10</text>
+                    </svg>
+                </div>
+
+                <i class="material-icons">settings</i>
+                <i class="material-icons">picture_in_picture_alt</i>
+                <i class="material-icons" id="full-btn">fullscreen</i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Google Drive Player Logic (আপনার আগের কোডের মতই)
+        var apikeys = ['AIzaSyCt3DULzE2trDJhfFUosWZT-3GEObbMqVU'];
+        var apikey = apikeys[0];
+        function getparam(a) { return new URLSearchParams(window.location.search).get(a); }
+
+        const video = document.getElementById('main-video');
+        const playBtn = document.getElementById('center-play');
+        const progressBar = document.getElementById('progress-bar');
+        const progressArea = document.getElementById('progress-area');
+
+        // লোড ভিডিও
+        if (getparam('id')) {
+            try {
+                let driveid = JSON.parse(atob(getparam('id'))).id;
+                video.src = `https://www.googleapis.com/drive/v3/files/${driveid}?alt=media&key=${apikey}`;
+            } catch (e) { video.src = 'https://bit.ly/bbsamplevideo'; }
+        } else { video.src = 'https://bit.ly/bbsamplevideo'; }
+
+        // প্লে/পজ
+        function togglePlay() {
+            if (video.paused) { video.play(); playBtn.style.display = "none"; }
+            else { video.pause(); playBtn.style.display = "block"; }
+        }
+        video.onclick = togglePlay;
+
+        // স্কিপ লজিক
+        document.getElementById('rewind').onclick = (e) => { e.stopPropagation(); video.currentTime -= 10; };
+        document.getElementById('forward').onclick = (e) => { e.stopPropagation(); video.currentTime += 10; };
+
+        // আপডেট প্রগ্রেস এবং টাইম
+        video.ontimeupdate = () => {
+            let pct = (video.currentTime / video.duration) * 100;
+            progressBar.style.width = pct + "%";
+            document.getElementById('current').innerText = formatTime(video.currentTime);
+        };
+        video.onloadeddata = () => { document.getElementById('total').innerText = formatTime(video.duration); };
+
+        function formatTime(t) {
+            let m = Math.floor(t / 60), s = Math.floor(t % 60);
+            return (m < 10 ? "0"+m : m) + ":" + (s < 10 ? "0"+s : s);
+        }
+
+        progressArea.onclick = (e) => { video.currentTime = (e.offsetX / progressArea.clientWidth) * video.duration; };
+        document.getElementById('full-btn').onclick = () => {
+            if (!document.fullscreenElement) document.querySelector('.video_player').requestFullscreen();
+            else document.exitFullscreen();
+        };
+    </script>
 </body>
 </html>
